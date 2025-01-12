@@ -68,9 +68,9 @@ class PusherBeamsPlugin : FlutterPlugin, Messages.PusherBeamsApi, ActivityAware,
         val extras = intent.extras
         if (extras != null) {
             if (initialIntent) {
-                Log.d(this.toString(), "Got extras: $extras")
+                Log.w(this.toString(), "Got extras: $extras")
                 data = bundleToMap(extras.getString("info"))
-                Log.d(this.toString(), "Got initial data: $data")
+                Log.w(this.toString(), "Got initial data: $data")
                 initialIntent = false
             }
         }
@@ -78,22 +78,22 @@ class PusherBeamsPlugin : FlutterPlugin, Messages.PusherBeamsApi, ActivityAware,
 
     override fun start(instanceId: kotlin.String) {
         PushNotifications.start(this.context, instanceId)
-        Log.d(this.toString(), "PusherBeams started with $instanceId instanceId")
+        Log.w(this.toString(), "PusherBeams started with $instanceId instanceId")
     }
 
     override fun getInitialMessage(result: Messages.Result<kotlin.collections.Map<String, kotlin.Any?>>) {
-        Log.d(this.toString(), "Returning initial data: $data")
+        Log.w(this.toString(), "Returning initial data: $data")
         result.success(data)
     }
 
     override fun addDeviceInterest(interest: kotlin.String) {
         PushNotifications.addDeviceInterest(interest)
-        Log.d(this.toString(), "Added device to interest: $interest")
+        Log.w(this.toString(), "Added device to interest: $interest")
     }
 
     override fun removeDeviceInterest(interest: String) {
         PushNotifications.removeDeviceInterest(interest)
-        Log.d(this.toString(), "Removed device to interest: $interest")
+        Log.w(this.toString(), "Removed device to interest: $interest")
     }
 
     override fun getDeviceInterests(): kotlin.collections.List<String> {
@@ -102,12 +102,12 @@ class PusherBeamsPlugin : FlutterPlugin, Messages.PusherBeamsApi, ActivityAware,
 
     override fun setDeviceInterests(interests: kotlin.collections.List<String>) {
         PushNotifications.setDeviceInterests(interests.toSet())
-        Log.d(this.toString(), "$interests added to device")
+        Log.w(this.toString(), "$interests added to device")
     }
 
     override fun clearDeviceInterests() {
         PushNotifications.clearDeviceInterests()
-        Log.d(this.toString(), "Cleared device interests")
+        Log.w(this.toString(), "Cleared device interests")
     }
 
     override fun onInterestChanges(callbackId: String) {
@@ -120,7 +120,7 @@ class PusherBeamsPlugin : FlutterPlugin, Messages.PusherBeamsApi, ActivityAware,
                         "onInterestChanges",
                         listOf(interests.toList()),
                         Messages.CallbackHandlerApi.Reply {
-                            Log.d(this.toString(), "interests changed $interests")
+                            Log.w(this.toString(), "interests changed $interests")
                         })
                 }
             })
@@ -154,7 +154,7 @@ class PusherBeamsPlugin : FlutterPlugin, Messages.PusherBeamsApi, ActivityAware,
                         "setUserId",
                         listOf(error.message),
                         Messages.CallbackHandlerApi.Reply {
-                            Log.d(this.toString(), "Failed to set Authentication to device")
+                            Log.w(this.toString(), "Failed to set Authentication to device")
                         })
                 }
 
@@ -164,7 +164,7 @@ class PusherBeamsPlugin : FlutterPlugin, Messages.PusherBeamsApi, ActivityAware,
                         "setUserId",
                         listOf(null),
                         Messages.CallbackHandlerApi.Reply {
-                            Log.d(this.toString(), "Device authenticated with $userId")
+                            Log.w(this.toString(), "Device authenticated with $userId")
                         })
                 }
             }
@@ -188,7 +188,7 @@ class PusherBeamsPlugin : FlutterPlugin, Messages.PusherBeamsApi, ActivityAware,
                                 "onMessageReceivedInTheForeground",
                                 listOf(pusherMessage)
                             ) {
-                                Log.d(this.toString(), "Message received: $pusherMessage")
+                                Log.w(this.toString(), "Message received: $pusherMessage")
                             }
                         }
                     }
