@@ -11,19 +11,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  pusher_beams_platform_interface: ^1.1.1
-  pusher_beams_web:
-    git:
-      url: https://github.com/Miko2x/pusher-beams-notifications-flutter
-      path: packages/pusher_beams_web
-      ref: master
+  # Override the platform interface
+  pusher_beams_platform_interface:
+        git:
+            url: https://github.com/kimonneuhoff/pusher-beams-notifications-flutter
+            path: packages/pusher_beams_platform_interface
+
+    # Override the Android implementation
   pusher_beams_android:
-    git:
-      url: https://github.com/Miko2x/pusher-beams-notifications-flutter
-      path: packages/pusher_beams_android
-      ref: master
-  pusher_beams_ios: ^1.1.1
-  uuid: ^4.2.1
+        git:
+            url: https://github.com/kimonneuhoff/pusher-beams-notifications-flutter
+            path: packages/pusher_beams_android
+
+    # Override the iOS implementation
+  pusher_beams_ios:
+        git:
+            url: https://github.com/kimonneuhoff/pusher-beams-notifications-flutter
+            path: packages/pusher_beams_ios
+
+    # Override the Web implementation
+  pusher_beams_web:
+        git:
+            url: https://github.com/kimonneuhoff/pusher-beams-notifications-flutter
+            path: packages/pusher_beams_web
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:
